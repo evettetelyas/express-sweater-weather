@@ -23,8 +23,8 @@ app.set('port', process.env.PORT || 3000);
 app.use('/', indexRouter);
 app.post('/api/v1/favorites', favoritesController.create)
 
-app.listen(app.get('port'), () => {
-	console.log(`${app.locals.title} is running`);
-  });
+// app.listen(app.get('port'), () => {
+// 	console.log(`${app.locals.title} is running`);
+//   });
 
 module.exports = app;
