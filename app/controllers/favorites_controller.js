@@ -28,7 +28,7 @@ const create = (request, response) => {
 			}
 			else {
 				return response
-				.status(422)
+				.status(401)
 				.send({message: "API key does not exist."})
 			}
 		}
@@ -60,7 +60,7 @@ const destroy = (request, response) => {
 			}
 			else {
 				return response
-				.status(422)
+				.status(401)
 				.send({message: "API key does not exist."})
 			}
 		}
