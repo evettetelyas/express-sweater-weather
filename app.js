@@ -18,15 +18,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.set('port', process.env.PORT || 3000);
+// app.set('port', process.env.PORT || 3000);
 
 app.use('/', indexRouter);
 app.post('/api/v1/favorites', favoritesController.create)
 app.delete('/api/v1/favorites', favoritesController.destroy)
 
 
-app.listen(app.get('port'), () => {
-	console.log(`${app.locals.title} is running`);
-  });
+// app.listen(app.get('port'), () => {
+// 	console.log(`${app.locals.title} is running`);
+//   });
 
-// module.exports = app;
+module.exports = app;
