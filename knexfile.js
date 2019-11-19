@@ -9,7 +9,7 @@ module.exports = {
       directory: './db/migrations'
     },
     seeds: {
-      directory: './db/seeds/dev'
+      directory: './db/seeds'
     },
     useNullAsDefault: true
   },
@@ -26,6 +26,9 @@ module.exports = {
     connection: 'postgres://loevugjrsrahtb:394d9caf0d3204fbc6973a66799c4c9f4386eca8fb53ed74b5f6150081817ac0@ec2-174-129-253-144.compute-1.amazonaws.com:5432/dd7bskne4og723',
     migrations: {
       directory: './db/migrations'
+    },
+    seeds: {
+      directory: './db/seeds'
     },
     useNullAsDefault: true
   }
