@@ -25,6 +25,6 @@ app.post('/api/v1/favorites', favoritesController.create)
 
 module.exports = app;
 
-// app.listen(app.get('port'), () => {
-// 	console.log(`${app.locals.title} is running`);
-//   });
+app.listen(app.get('port'), () => {
+	console.log(`${app.locals.title} is running`);
+  });
