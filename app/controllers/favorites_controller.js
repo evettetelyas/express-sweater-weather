@@ -16,6 +16,12 @@ const create = (request, response) => {
 			.status(422)
 			.send({ error: `Expected format: { location: <String>, api_key: <String> }. You're missing a "${requiredParameter}" property.` });
 		}
+
+		if (!user) {
+			return response
+			.status(422)
+			.send({ error: `User does not exist.` });
+		}
 	}
 	
 	database('favorites').insert(favorite, 'id')
