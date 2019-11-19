@@ -20,7 +20,9 @@ const create = (request, response) => {
 	
 	database('favorites').insert(favorite, 'id')
 		.then(favorite => {
-		response.status(200).json(req.location + " has been added to your favorites")
+		response.status(200).json({
+			message: req.location + " has been added to your favorites"
+		})
 		})
 		.catch(error => {
 		response.status(401).json({ error });
