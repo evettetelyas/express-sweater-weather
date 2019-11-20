@@ -106,9 +106,9 @@ function forecastHash(cities) {
 		var state = loc.location.split(",")[1].substring(1)
 		var google_key = process.env.GOOGLE_API_KEY
 		var google_base_url = "https://maps.googleapis.com/maps/api/geocode/json"
-		var google_url = google_base_url + "?key=" + google_key + "&address=" + city + "+" + state
+		var google_url = `${google_base_url}?key=${google_key}&address=${city}+${state}`
 		var darksky_key = process.env.DARKSKY_API_KEY
-		var darksky_url = "https://api.darksky.net/forecast/" + darksky_key + "/"
+		var darksky_url = `https://api.darksky.net/forecast/${darksky_key}/`
 		fetch(google_url)
 		.then((res) => res.json())
 		.then((json) => {
