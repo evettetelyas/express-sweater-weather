@@ -27,61 +27,48 @@ const show = (request, response) => {
 			var darksky_url = `https://api.darksky.net/forecast/${darksky_key}/`
 		
 			fetch(google_url)
-			.then((res) => {
-				return res.json()
-		})
-		.catch(error => {
-			response.status(401).json({ error });
-			})
-		.then((json) => {
-			var lat_lng =  json.results[0].geometry.location
-			var lat_lng_format = lat_lng.lat + "," + lat_lng.lng
-			fetch(darksky_url + lat_lng_format)
-			.then((res) => {
-				return res.json()
-			})
-			.catch(error => {
-				response.status(401).json({ error });
-				})
+			.then((res) => res.json())
 			.then((json) => {
-				response.status(200).json({
-					location: location,
-					currently: {
-						summary: json.currently.summary,
-						icon: json.currently.icon,
-						precipIntensity: json.currently.precipIntensity,
-						temperature: json.currently.temperature,
-						humidity: json.currently.humidity,
-						pressure: json.currently.pressure,
-						windSpeed: json.currently.windSpeed,
-						windGust: json.currently.windGust,
-						windBearing: json.currently.windBearing,
-						cloudCover: json.currently.cloudCover,
-						visibility: json.currently.visibility
-					},
-					hourly: {
-						summary: json.hourly.summary,
-						icon: json.hourly.icon,
-						data: hourlyContent(json.hourly.data)
-					},
-					daily: {
-						summary: json.daily.summary,
-						icon: json.daily.icon,
-						data: dailyContent(json.daily.data)
-					}
-				})
-			})		
-		})
-		.catch(error => {
-			response.status(401).json({ error });
-			});
+				var lat_lng =  json.results[0].geometry.location
+				var lat_lng_format = lat_lng.lat + "," + lat_lng.lng
+				fetch(darksky_url + lat_lng_format)
+				.then((res) => res.json())
+				.then((json) => {
+					response.status(200).json({
+						location: location,
+						currently: {
+							summary: json.currently.summary,
+							icon: json.currently.icon,
+							precipIntensity: json.currently.precipIntensity,
+							temperature: json.currently.temperature,
+							humidity: json.currently.humidity,
+							pressure: json.currently.pressure,
+							windSpeed: json.currently.windSpeed,
+							windGust: json.currently.windGust,
+							windBearing: json.currently.windBearing,
+							cloudCover: json.currently.cloudCover,
+							visibility: json.currently.visibility
+						},
+						hourly: {
+							summary: json.hourly.summary,
+							icon: json.hourly.icon,
+							data: hourlyContent(json.hourly.data)
+						},
+						daily: {
+							summary: json.daily.summary,
+							icon: json.daily.icon,
+							data: dailyContent(json.daily.data)
+						}
+					})
+				})		
+			})
 		} else {
 			return response
 				.status(401)
 				.send({message: "API key does not exist."})
-		}
-	})
-};
+			}
+		})
+	};
 
 function hourlyContent(hourlyData) {
   var hourlys = []
