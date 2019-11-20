@@ -100,7 +100,7 @@ const show = (request, response) => {
 };
 
 function forecasts(cities) {
-	var forecasts = []
+	const forecasts = []
 	cities.forEach(loc => {
 		var city = loc.location.split(",")[0]
 		var state = loc.location.split(",")[1].substring(1)
@@ -134,7 +134,6 @@ function forecasts(cities) {
 						}
 					}
 				forecasts.push(obj)
-				console.log(forecasts)
 			})
 		})
 	})

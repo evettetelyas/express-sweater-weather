@@ -25,7 +25,6 @@ const show = (request, response) => {
 			var google_url = `${google_base_url}?key=${google_key}&address=${city}+${state}`
 			var darksky_key = process.env.DARKSKY_API_KEY
 			var darksky_url = `https://api.darksky.net/forecast/${darksky_key}/`
-		
 			fetch(google_url)
 			.then((res) => res.json())
 			.then((json) => {
