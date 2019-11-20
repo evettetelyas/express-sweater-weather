@@ -12,8 +12,6 @@ var forecastsController = require('./app/controllers/forecasts_controller')
 
 var app = express();
 
-app.locals.title = 'Express Sweater Weather';
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
