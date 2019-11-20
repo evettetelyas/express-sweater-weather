@@ -86,7 +86,7 @@ const show = (request, response) => {
 				var ary = [];
 				database('favorites').where('user_id', user[0].id).distinct('location')
 				.then(cities => {
-					response.status(200).json(forecastHash(cities))
+					response.status(200).json(forecasts(cities))
 					})
 				.catch(error => {
 					response.status(401).json({ error })
@@ -99,7 +99,7 @@ const show = (request, response) => {
 		})
 };
 
-function forecastHash(cities) {
+function forecasts(cities) {
 	var forecasts = []
 	cities.forEach(loc => {
 		var city = loc.location.split(",")[0]
