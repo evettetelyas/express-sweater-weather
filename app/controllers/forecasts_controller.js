@@ -1,8 +1,8 @@
 require('dotenv').config();
 const fetch = require('node-fetch');
-const environment = process.env.NODE_ENV || 'development';
-const configuration = require('../../knexfile')[environment];
-const database = require('knex')(configuration);
+// const environment = process.env.NODE_ENV || 'development';
+// const configuration = require('../../knexfile')[environment];
+// const database = require('knex')(configuration);
 const helper = require('../helpers/format_helper');
 const User = require('../models/user')
 
