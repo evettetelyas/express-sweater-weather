@@ -2,10 +2,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
-const environment = process.env.NODE_ENV || 'development';
-const configuration = require('./knexfile')[environment];
-
 var indexRouter = require('./routes/index');
 var favoritesController = require('./app/controllers/favorites_controller')
 var forecastsController = require('./app/controllers/forecasts_controller')

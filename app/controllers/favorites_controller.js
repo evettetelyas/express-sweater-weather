@@ -51,9 +51,9 @@ const show = (request, response) => {
 					})
         .catch(error => response.status(500).json(error))
 			} else {
-				return response
-					.status(401)
-					.send({message: "API key does not exist."})
+			  	return response
+          .status(401)
+          .send({message: "API key does not exist."})
 			}
 		})
 };
