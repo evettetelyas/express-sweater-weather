@@ -13,9 +13,8 @@ const show = (request, response) => {
 		return response
 			.status(422)
 			.send({ error: `Expected format: { api_key: <String> }. You're missing a "${requiredParameter}" property.` });
-		};
-	}
-	
+		}
+	};
 	database('users').where('api_key', req.api_key).limit(1)
 		.then(user => {
 			if (user[0]) {
