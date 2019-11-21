@@ -1,6 +1,6 @@
 require('dotenv').config();
 const User = require('../models/user')
-const helper = require('../helpers/fave_helper')
+const helper = require('../helpers/fetch_helper')
 
 const create = (request, response) => {
 	const favorite = request.body
