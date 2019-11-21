@@ -44,8 +44,9 @@ function hourlyContent(hourlyData) {
 	return daily;
   }
   
-  function formattedContent(json) {
+  function formattedContent(json, loc) {
 	  var obj = {
+		  location: loc,
 		  currently: {
 			  summary: json.currently.summary,
 			  icon: json.currently.icon,

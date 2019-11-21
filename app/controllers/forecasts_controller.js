@@ -24,7 +24,7 @@ const show = (request, response) => {
 				fetch(darksky_url + lat_lng_format)
 				.then((res) => res.json())
 				.then((json) => {
-					var content = helper.formattedContent(json)
+					var content = helper.formattedContent(json, location)
 					response.status(200).json(content)
 				})		
 			})
