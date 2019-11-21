@@ -1,21 +1,12 @@
 require('dotenv').config();
 const fetch = require('node-fetch');
-const environment = process.env.NODE_ENV || 'development';
-const configuration = require('../../knexfile')[environment];
-const database = require('knex')(configuration);
+const helper = require('../helpers/format_helper');
+const User = require('../models/user')
 
 const show = (request, response) => {
 	const location = request.param('location')
 	const req = request.body
-	for (let requiredParameter of ['api_key']) {
-		if (!req[requiredParameter]) {
-		return response
-			.status(422)
-			.send({ error: `Expected format: { api_key: <String> }. You're missing a "${requiredParameter}" property.` });
-		};
-	}
-	
-	database('users').where('api_key', req.api_key).limit(1)
+	User.byApiKey(req.api_key)
 		.then(user => {
 			if (user[0]) {
 			var city = location.split(",")[0]
@@ -33,32 +24,8 @@ const show = (request, response) => {
 				fetch(darksky_url + lat_lng_format)
 				.then((res) => res.json())
 				.then((json) => {
-					response.status(200).json({
-						location: location,
-						currently: {
-							summary: json.currently.summary,
-							icon: json.currently.icon,
-							precipIntensity: json.currently.precipIntensity,
-							temperature: json.currently.temperature,
-							humidity: json.currently.humidity,
-							pressure: json.currently.pressure,
-							windSpeed: json.currently.windSpeed,
-							windGust: json.currently.windGust,
-							windBearing: json.currently.windBearing,
-							cloudCover: json.currently.cloudCover,
-							visibility: json.currently.visibility
-						},
-						hourly: {
-							summary: json.hourly.summary,
-							icon: json.hourly.icon,
-							data: hourlyContent(json.hourly.data)
-						},
-						daily: {
-							summary: json.daily.summary,
-							icon: json.daily.icon,
-							data: dailyContent(json.daily.data)
-						}
-					})
+					var content = helper.formattedContent(json)
+					response.status(200).json(content)
 				})		
 			})
 		} else {
@@ -68,52 +35,6 @@ const show = (request, response) => {
 			}
 		})
 	};
-
-function hourlyContent(hourlyData) {
-  var hourlys = []
-  hourlyData.forEach (hour => {
-    var obj = { 
-      time: hour.time,
-      summary: hour.summary,
-      icon: hour.icon,
-      precipIntensity: hour.precipIntensity,
-      precipProbability: hour.precipProbability,
-      temperature: hour.temperature,
-      humidity: hour.humidity,
-      pressure: hour.pressure,
-      windSpeed: hour.windSpeed,
-      windGust: hour.windGust,
-      windBearing: hour.windBearing,
-      cloudCover: hour.cloudCover,
-      visibility: hour.visibility 
-    }
-    hourlys.push(obj)
-  })
-  return hourlys;
-}; 
-
-function dailyContent(dailyData) {
-  var daily = []
-  dailyData.forEach (day => {
-    var obj = { 
-      time: day.time,
-      summary: day.summary,
-      icon: day.icon,
-      precipIntensity: day.precipIntensity,
-      precipProbability: day.precipProbability,
-      temperature: day.temperature,
-      humidity: day.humidity,
-      pressure: day.pressure,
-      windSpeed: day.windSpeed,
-      windGust: day.windGust,
-      windBearing: day.windBearing,
-      cloudCover: day.cloudCover,
-      visibility: day.visibility 
-    }
-    daily.push(obj)
-  })
-  return daily;
-}
 
 module.exports = {
 	show,
