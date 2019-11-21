@@ -1,5 +1,4 @@
 require('dotenv').config();
-// const fetch = require('node-fetch');
 const User = require('../models/user')
 const helper = require('../helpers/fave_helper')
 
