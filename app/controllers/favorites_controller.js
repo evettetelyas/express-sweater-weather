@@ -8,14 +8,10 @@ const create = (request, response) => {
 		.then(user => {
 			if (user[0]) {
 				User.addFavorite(user[0].id, favorite.location)
-				.then(fave => {
-					response.status(200).json({
+				.then(() => response.status(201).json({
 						message: `${favorite.location} has been added to your favorites`
-						})
-					})
-					.catch(error => {
-					response.status(401).json({ error });
-					});
+						}))
+					.catch(error => response.status(500).json(error))
 			}
 			else {
 				return response
@@ -34,12 +30,8 @@ const destroy = (request, response) => {
 		.then(user => {
 			if (user[0]) {
 				User.removeFavorite(user[0].id, favorite.location)
-				.then(deleted => {
-					response.status(204).json({status: 204})
-					})
-					.catch(error => {
-					response.status(401).json({ error });
-					});
+				.then(() => response.status(204).json())
+        .catch(error => response.status(500).json(error))
 			}
 			else {
 				return response
@@ -61,9 +53,7 @@ const show = (request, response) => {
 					result = helper.forecasts(cities)
 					response.status(200).send(result)
 					})
-				.catch(error => {
-					response.status(401).json({ error })
-				})
+        .catch(error => response.status(500).json(error))
 			} else {
 				return response
 					.status(401)

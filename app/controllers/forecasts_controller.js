@@ -28,6 +28,7 @@ const show = (request, response) => {
 					response.status(200).json(content)
 				})		
 			})
+			.catch(error => response.status(500).json(error))
 		} else {
 			return response
 				.status(401)
