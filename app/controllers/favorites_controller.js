@@ -15,7 +15,7 @@ const create = (request, response) => {
 		};
 	}
 
-	database('users').where('api_key', favorite.api_key).limit(1)
+	User.byApiKey(favorite.api_key)
 		.then(user => {
 			if (user[0]) {
 				database('favorites').insert({user_id: user[0].id, location: favorite.location})
@@ -49,7 +49,7 @@ const destroy = (request, response) => {
 		};
 	}
 
-	database('users').where('api_key', favorite.api_key).limit(1)
+	User.byApiKey(favorite.api_key)
 		.then(user => {
 			if (user[0]) {
 				database('favorites').del().where({user_id: user[0].id, location: favorite.location})
