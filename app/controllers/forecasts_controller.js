@@ -1,21 +1,11 @@
 require('dotenv').config();
 const fetch = require('node-fetch');
-// const environment = process.env.NODE_ENV || 'development';
-// const configuration = require('../../knexfile')[environment];
-// const database = require('knex')(configuration);
 const helper = require('../helpers/format_helper');
 const User = require('../models/user')
 
 const show = (request, response) => {
 	const location = request.param('location')
 	const req = request.body
-	for (let requiredParameter of ['api_key']) {
-		if (!req[requiredParameter]) {
-		return response
-			.status(422)
-			.send({ error: `Expected format: { api_key: <String> }. You're missing a "${requiredParameter}" property.` });
-		}
-	};
 	User.byApiKey(req.api_key)
 		.then(user => {
 			if (user[0]) {

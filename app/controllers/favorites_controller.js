@@ -4,14 +4,6 @@ const User = require('../models/user')
 
 const create = (request, response) => {
 	const favorite = request.body
-	for (let requiredParameter of ['location', 'api_key']) {
-		if (!favorite[requiredParameter]) {
-		return response
-			.status(422)
-			.send({ error: `Expected format: { location: <String>, api_key: <String> }. You're missing a "${requiredParameter}" property.` });
-		};
-	}
-
 	User.byApiKey(favorite.api_key)
 		.then(user => {
 			if (user[0]) {
@@ -38,14 +30,6 @@ const create = (request, response) => {
 
 const destroy = (request, response) => {
 	const favorite = request.body
-	for (let requiredParameter of ['location', 'api_key']) {
-		if (!favorite[requiredParameter]) {
-		return response
-			.status(422)
-			.send({ error: `Expected format: { location: <String>, api_key: <String> }. You're missing a "${requiredParameter}" property.` });
-		};
-	}
-
 	User.byApiKey(favorite.api_key)
 		.then(user => {
 			if (user[0]) {
@@ -67,16 +51,8 @@ const destroy = (request, response) => {
 	)
 };
 
-
 const show = (request, response) => {
 	const req = request.body
-	for (let requiredParameter of ['api_key']) {
-		if (!req[requiredParameter]) {
-		return response
-			.status(422)
-			.send({ error: `Expected format: { api_key: <String> }. You're missing a "${requiredParameter}" property.` });
-		};
-	}
 	User.byApiKey(req.api_key)
 		.then(user => {
 			if (user[0]) {
