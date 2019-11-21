@@ -73,8 +73,8 @@ function hourlyContent(hourlyData) {
 	  return obj;
   }
 
-  module.exports = {
-	  hourlyContent,
-	  dailyContent,
-	  formattedContent,
-  }
+module.exports = {
+	hourlyContent,
+	dailyContent,
+	formattedContent,
+}
