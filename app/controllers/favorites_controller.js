@@ -80,7 +80,7 @@ const show = (request, response) => {
 			.send({ error: `Expected format: { api_key: <String> }. You're missing a "${requiredParameter}" property.` });
 		};
 	}
-	database('users').where('api_key', req.api_key).limit(1)
+	User.byApiKey(req.api_key)
 		.then(user => {
 			if (user[0]) {
 				User.favorites(user[0].id)

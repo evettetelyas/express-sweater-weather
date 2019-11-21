@@ -9,7 +9,12 @@ const favorites = (id) => database('favorites')
 	.where('user_id', id)
 	.distinct('location')
 
+const byApiKey = (key) => database('users')
+	.where('api_key', key)
+	.limit(1)
+
 module.exports = {
 	all,
 	favorites,
+	byApiKey,
 }
