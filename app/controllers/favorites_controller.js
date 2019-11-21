@@ -3,6 +3,7 @@ const fetch = require('node-fetch');
 const environment = process.env.NODE_ENV || 'development';
 const configuration = require('../../knexfile')[environment];
 const database = require('knex')(configuration);
+const User = require('../models/user')
 
 const create = (request, response) => {
 	const favorite = request.body
@@ -79,11 +80,10 @@ const show = (request, response) => {
 			.send({ error: `Expected format: { api_key: <String> }. You're missing a "${requiredParameter}" property.` });
 		};
 	}
-	
 	database('users').where('api_key', req.api_key).limit(1)
 		.then(user => {
 			if (user[0]) {
-				database('favorites').where('user_id', user[0].id).distinct('location')
+				User.favorites(user[0].id)
 				.then(cities => {
 					result = forecasts(cities)
 					response.status(200).send(result)
