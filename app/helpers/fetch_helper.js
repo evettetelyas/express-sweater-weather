@@ -38,6 +38,17 @@ async function getForecastObj(coords, loc) {
   return formatter.formatCurrently(json, loc)
 }
 
+async function getTotalForecastObj(coords, loc) {
+  var lat_lng = coords.lat + "," + coords.lng
+  var resp = await fetch(darksky_url + lat_lng)
+  var json = await resp.json()
+  return formatter.formattedContent(json, loc)
+}
+
+
 module.exports = {
-	forecasts,
+  forecasts,
+  getCoords,
+  getForecastObj,
+  getTotalForecastObj,
 }
