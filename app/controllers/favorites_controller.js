@@ -18,11 +18,11 @@ const create = (request, response) => {
 	User.byApiKey(favorite.api_key)
 		.then(user => {
 			if (user[0]) {
-				database('favorites').insert({user_id: user[0].id, location: favorite.location})
+				User.addFavorite(user[0].id, favorite.location)
 				.then(fave => {
 					response.status(200).json({
-						message: favorite.location + " has been added to your favorites"
-					})
+						message: `${favorite.location} has been added to your favorites`
+						})
 					})
 					.catch(error => {
 					response.status(401).json({ error });
@@ -52,7 +52,7 @@ const destroy = (request, response) => {
 	User.byApiKey(favorite.api_key)
 		.then(user => {
 			if (user[0]) {
-				database('favorites').del().where({user_id: user[0].id, location: favorite.location})
+				User.removeFavorite(user[0].id, favorite.location)
 				.then(deleted => {
 					response.status(204).json({status: 204})
 					})

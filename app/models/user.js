@@ -13,8 +13,17 @@ const byApiKey = (key) => database('users')
 	.where('api_key', key)
 	.limit(1)
 
+const addFavorite = (id, location) => database('favorites')
+	.insert({user_id: id, location: location})
+
+const removeFavorite = (id, location) => database('favorites')
+	.del()
+	.where({user_id: id, location: location})
+
 module.exports = {
 	all,
 	favorites,
 	byApiKey,
+	addFavorite,
+	removeFavorite,
 }
