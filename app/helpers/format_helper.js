@@ -73,8 +73,29 @@ function hourlyContent(hourlyData) {
 	  return obj;
   }
 
+function formatCurrently(json, loc) {
+	var obj = {
+		location: loc.location,
+		currently: {
+			summary: json.currently.summary,
+			icon: json.currently.icon,
+			precipIntensity: json.currently.precipIntensity,
+			temperature: json.currently.temperature,
+			humidity: json.currently.humidity,
+			pressure: json.currently.pressure,
+			windSpeed: json.currently.windSpeed,
+			windGust: json.currently.windGust,
+			windBearing: json.currently.windBearing,
+			cloudCover: json.currently.cloudCover,
+			visibility: json.currently.visibility
+		}
+	}
+	return obj;
+}
+
 module.exports = {
 	hourlyContent,
 	dailyContent,
 	formattedContent,
+	formatCurrently,
 }

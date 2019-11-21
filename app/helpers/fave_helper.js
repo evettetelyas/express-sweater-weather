@@ -1,16 +1,17 @@
 require('dotenv').config();
 const fetch = require('node-fetch');
+const google_key = process.env.GOOGLE_API_KEY
+const google_base_url = "https://maps.googleapis.com/maps/api/geocode/json"
+const darksky_key = process.env.DARKSKY_API_KEY
+const darksky_url = `https://api.darksky.net/forecast/${darksky_key}/`
+const formatter = require('../helpers/format_helper')
 const forecastsAry = []
 
 function forecasts(cities) {
 	cities.forEach(loc => {
 		var city = loc.location.split(",")[0]
 		var state = loc.location.split(",")[1].substring(1)
-		var google_key = process.env.GOOGLE_API_KEY
-		var google_base_url = "https://maps.googleapis.com/maps/api/geocode/json"
 		var google_url = `${google_base_url}?key=${google_key}&address=${city}+${state}`
-		var darksky_key = process.env.DARKSKY_API_KEY
-		var darksky_url = `https://api.darksky.net/forecast/${darksky_key}/`
 		fetch(google_url)
 		.then((res) => res.json())
 		.then((json) => {
@@ -19,23 +20,8 @@ function forecasts(cities) {
 			fetch(darksky_url + lat_lng_format)
 			.then((res) => res.json())
 			.then((json) => {
-				var obj = {
-						location: loc.location,
-						currently: {
-							summary: json.currently.summary,
-							icon: json.currently.icon,
-							precipIntensity: json.currently.precipIntensity,
-							temperature: json.currently.temperature,
-							humidity: json.currently.humidity,
-							pressure: json.currently.pressure,
-							windSpeed: json.currently.windSpeed,
-							windGust: json.currently.windGust,
-							windBearing: json.currently.windBearing,
-							cloudCover: json.currently.cloudCover,
-							visibility: json.currently.visibility
-						}
-					}
-				forecastsAry.push(obj)
+				content = formatter.formatCurrently(json, loc)
+				forecastsAry.push(content)
 			})
 		})
 	})
