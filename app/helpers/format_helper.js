@@ -76,7 +76,7 @@ function hourlyContent(hourlyData) {
 
 function formatCurrently(json, loc) {
 	var obj = {
-		location: loc.location,
+		location: loc,
 		currently: {
 			summary: json.currently.summary,
 			icon: json.currently.icon,

@@ -18,9 +18,7 @@ const create = (request, response) => {
 				.status(401)
 				.send({message: "API key does not exist."})
 			}
-		}
-
-	)
+		})
 };
 
 
@@ -38,9 +36,7 @@ const destroy = (request, response) => {
 				.status(401)
 				.send({message: "API key does not exist."})
 			}
-		}
-
-	)
+		})
 };
 
 const show = (request, response) => {
@@ -49,9 +45,9 @@ const show = (request, response) => {
 		.then(user => {
 			if (user[0]) {
 				User.favorites(user[0].id)
-				.then(cities => {
-					result = helper.forecasts(cities)
-					response.status(200).send(result)
+				.then(async cities => {
+          var content = await helper.forecasts(cities)
+					response.status(200).json(content)
 					})
         .catch(error => response.status(500).json(error))
 			} else {
