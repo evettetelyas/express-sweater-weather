@@ -25,7 +25,8 @@ $ knex seed:run
 ## Endpoints
 
 Production Root URL: `express-sweaterweather.herokuapp.com` 
-**a valid api key is required for all endpoints except Create User**
+* a valid api key is required for all endpoints except Create User
+* User emails must be unique to receive an API key
 
 #### Create User
 `POST /api/v1/users`
@@ -33,7 +34,7 @@ Production Root URL: `express-sweaterweather.herokuapp.com`
 sample request
 ```
 {
-  "email": "eevette@email.com",
+  "email": "evette@email.com",
   "password": "password"
 }
 ```
@@ -51,6 +52,7 @@ sample response
 sample request
 ```
 {
+  "location": "Denver, CO",
   "api_key": "jgn983hy48thw9begh98h4539h4"
 }
 ```
@@ -68,6 +70,7 @@ sample response
 sample request
 ```
 {
+  "location": "Denver, CO",
   "api_key": "jgn983hy48thw9begh98h4539h4"
 }
 ```
