@@ -1,6 +1,7 @@
 const environment = process.env.NODE_ENV || 'development';
 const configuration = require('../../knexfile')[environment];
 const database = require('knex')(configuration);
+const hat = require('hat');
 
 const all = () => database('users')
   .select()
@@ -20,10 +21,19 @@ const removeFavorite = (id, location) => database('favorites')
 	.del()
 	.where({user_id: id, location: location})
 
+const create = (email, hash) => database('users')
+	.insert({email: email, password_hash: hash, api_key: hat()})
+
+const usersByEmail = (email) => database('users')
+	.where('email', email)
+
+
 module.exports = {
 	all,
 	favorites,
 	byApiKey,
 	addFavorite,
 	removeFavorite,
+	create,
+	usersByEmail,
 }
