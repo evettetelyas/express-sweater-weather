@@ -23,8 +23,6 @@ $ knex seed:run
 ```
 
 ## Endpoints
-
-Click below to run all endpoints in Postman
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/dff1f14834edb7d9420f)
 
 Production Root URL: `express-sweaterweather.herokuapp.com` 
