@@ -1,4 +1,4 @@
-# All your Express base are belong to us
+# Express Sweater Weather
 
 [![Build Status](https://travis-ci.com/turingschool-examples/all-your-base.svg?branch=master)](https://travis-ci.com/turingschool-examples/all-your-base)
 
