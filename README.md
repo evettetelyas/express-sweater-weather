@@ -24,7 +24,8 @@ $ knex seed:run
 
 ## Endpoints
 
-Run all endpoints in Postman: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/dff1f14834edb7d9420f)
+Click below to run all endpoints in Postman
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/dff1f14834edb7d9420f)
 
 Production Root URL: `express-sweaterweather.herokuapp.com` 
 * a valid api key is required for all endpoints except Create User
