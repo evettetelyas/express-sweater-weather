@@ -25,19 +25,19 @@ $ knex seed:run
 ## Endpoints
 
 Production Root URL: `express-sweaterweather.herokuapp.com`
-*a valid api key is required for all endpoints except Create User*
+**a valid api key is required for all endpoints except Create User**
 
 #### Get Forecast for a Location
 `/api/v1/forecast?location=denver,co`
 
-*sample request*
+**sample request**
 ```
 {
   "api_key": "jgn983hy48thw9begh98h4539h4"
 }
 ```
 
-*sample response*
+**sample response**
 ```
 {
   "location": "Denver, C0",
