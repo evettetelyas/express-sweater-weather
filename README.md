@@ -28,7 +28,7 @@ Production Root URL: `express-sweaterweather.herokuapp.com`
 * a valid api key is required for all endpoints except Create User
 * User emails must be unique to receive an API key
 
-#### Create User
+### Create User
 `POST /api/v1/users`
 
 sample request
@@ -46,7 +46,7 @@ sample response
 }
 ```
 
-#### Add Favorite Location
+### Add Favorite Location
 `POST /api/v1/favorites`
 
 sample request
@@ -64,7 +64,7 @@ sample response
 }
 ```
 
-#### Remove Favorite Location
+### Remove Favorite Location
 `DELETE /api/v1/favorites`
 
 sample request
@@ -80,7 +80,56 @@ sample response
 204 No Content
 ```
 
-#### Get Forecast for a Location
+### Get Forecasts for a User's Favorited Locations
+`GET /api/v1/favorites`
+
+sample request
+```
+{
+  "api_key": "jgn983hy48thw9begh98h4539h4"
+}
+```
+
+sample response
+```
+[
+    {
+        "location": "Denver, CO",
+        "currently": {
+            "summary": "Flurries",
+            "icon": "snow",
+            "precipIntensity": 0.009,
+            "temperature": 28.15,
+            "humidity": 0.94,
+            "pressure": 1021,
+            "windSpeed": 2.58,
+            "windGust": 4.87,
+            "windBearing": 31,
+            "cloudCover": 1,
+            "visibility": 2.652
+        }
+    },
+    {
+        "location": "Montauk, NY",
+        "currently": {
+            "summary": "Mostly Cloudy",
+            "icon": "partly-cloudy-night",
+            "precipIntensity": 0,
+            "temperature": 52.67,
+            "humidity": 0.74,
+            "pressure": 1014.1,
+            "windSpeed": 14.36,
+            "windGust": 14.36,
+            "windBearing": 221,
+            "cloudCover": 0.64,
+            "visibility": 10
+        }
+    }
+]
+```
+
+
+### Get Forecast for a Single Location
 `GET /api/v1/forecast?location=denver,co`
 
 sample request
