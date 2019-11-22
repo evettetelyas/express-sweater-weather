@@ -24,9 +24,12 @@ const removeFavorite = (id, location) => database('favorites')
 const create = (email, hash) => database('users')
 	.insert({email: email, password_hash: hash, api_key: hat()})
 
-const usersByEmail = (email) => database('users')
+const byEmail = (email) => database('users')
 	.where('email', email)
 
+const keyByEmail = (email) => database('users')
+	.select('api_key')
+	.where('email', email)
 
 module.exports = {
 	all,
@@ -35,5 +38,6 @@ module.exports = {
 	addFavorite,
 	removeFavorite,
 	create,
-	usersByEmail,
+	byEmail,
+	keyByEmail,
 }
