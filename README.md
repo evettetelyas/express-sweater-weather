@@ -27,8 +27,58 @@ $ knex seed:run
 Production Root URL: `express-sweaterweather.herokuapp.com` 
 **a valid api key is required for all endpoints except Create User**
 
+#### Create User
+`POST /api/v1/users`
+
+sample request
+```
+{
+  "email": "eevette@email.com",
+  "password": "password"
+}
+```
+
+sample response
+```
+{
+    "message": "User has been created with key: a9bd614f3b105930c3c20cac3a13cc2c"
+}
+```
+
+#### Add Favorite Location
+`POST /api/v1/favorites`
+
+sample request
+```
+{
+  "api_key": "jgn983hy48thw9begh98h4539h4"
+}
+```
+
+sample response
+```
+{
+  "message": "Denver, CO has been added to your favorites"
+}
+```
+
+#### Remove Favorite Location
+`DELETE /api/v1/favorites`
+
+sample request
+```
+{
+  "api_key": "jgn983hy48thw9begh98h4539h4"
+}
+```
+
+sample response
+```
+204 No Content
+```
+
 #### Get Forecast for a Location
-`/api/v1/forecast?location=denver,co`
+`GET /api/v1/forecast?location=denver,co`
 
 sample request
 ```
